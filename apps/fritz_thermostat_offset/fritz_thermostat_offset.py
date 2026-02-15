@@ -69,23 +69,15 @@ class FritzThermostatOffset(hass.Hass):
 
                     if new_offset != current_offset:
                         self.log(
-                            "🌡️ %s\n"
-                            "  - sensor: %.1f°C (%s)\n"
-                            "  - thermostat: %.1f°C\n"
-                            "  - offset: %.1f -> %.1f",
-                            name, actual_temp, thermometer,
-                            thermostat_temp, current_offset, new_offset,
+                            "%s: actual=%.1f, thermostat=%.1f, offset %.1f -> %.1f",
+                            name, actual_temp, thermostat_temp, current_offset, new_offset,
                         )
                         self.fat.set_thermostat_offset(name, new_offset)
                         changed = True
                     else:
                         self.log(
-                            "🌡️ %s\n"
-                            "  - sensor: %.1f°C (%s)\n"
-                            "  - thermostat: %.1f°C\n"
-                            "  - offset: %.1f (no change)",
-                            name, actual_temp, thermometer,
-                            thermostat_temp, current_offset, level="DEBUG",
+                            "%s: offset %.1f is correct (actual=%.1f, thermostat=%.1f)",
+                            name, current_offset, actual_temp, thermostat_temp, level="DEBUG",
                         )
                 except FritzAdvancedThermostatError:
                     self.log("Failed to update offset for %s", name, level="ERROR")
