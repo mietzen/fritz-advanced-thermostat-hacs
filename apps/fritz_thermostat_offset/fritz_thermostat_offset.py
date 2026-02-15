@@ -9,8 +9,6 @@ class FritzThermostatOffset(hass.Hass):
 
     def initialize(self):
         """Initialize the app: connect to Fritz!Box and start polling."""
-        self.set_execution_timeout(120)
-
         self.fritz_host = self.args["fritz_host"]
         self.fritz_user = self.args["fritz_user"]
         self.fritz_password = self.args["fritz_password"]

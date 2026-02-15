@@ -36,6 +36,12 @@ You will also need to [set up a Fritz!Box user](https://github.com/hthiery/pytho
 
 ## Configuration
 
+Add the following to your `appdaemon.yaml`:
+
+```yaml
+  thread_duration_warning_threshold: 60
+```
+
 Add the following to your `apps.yaml`:
 
 ```yaml
