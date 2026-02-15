@@ -72,8 +72,6 @@ fritz_password: "my-password"
 | `fritz_password` | Yes | string | | Fritz!Box password |
 | `ssl_verify` | No | bool | `false` | Verify SSL certificate |
 | `interval` | No | int | `300` | Polling interval in seconds |
-| `max_offset` | No | float | `5.0` | Maximum allowed offset |
-| `min_offset` | No | float | `-5.0` | Minimum allowed offset |
 | `thermostats` | Yes | list | | List of thermostat-to-sensor mappings |
 
 ### Thermostat Mapping

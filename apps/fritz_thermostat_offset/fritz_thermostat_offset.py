@@ -14,8 +14,8 @@ class FritzThermostatOffset(hass.Hass):
         self.fritz_password = self.args["fritz_password"]
         self.ssl_verify = self.args.get("ssl_verify", False)
         self.interval = self.args.get("interval", 300)
-        self.max_offset = self.args.get("max_offset", 5.0)
-        self.min_offset = self.args.get("min_offset", -5.0)
+        self.max_offset = 5.0
+        self.min_offset = -5.0
 
         self.mappings = self.args["thermostats"]
 
@@ -43,6 +43,9 @@ class FritzThermostatOffset(hass.Hass):
         if self.fat is None and not self._connect():
             return
 
+        # Get latest thermostat data
+        self.fat.reload_thermostat_data()
+
         changed = False
 
         for mapping in self.mappings:
@@ -57,7 +60,7 @@ class FritzThermostatOffset(hass.Hass):
 
             for name in thermostat_names:
                 try:
-                    thermostat_temp = self.fat.get_thermostat_temperature(name, force_reload=not changed)
+                    thermostat_temp = self.fat.get_thermostat_temperature(name)
                     current_offset = self.fat.get_thermostat_offset(name)
 
                     new_offset = current_offset + (actual_temp - thermostat_temp)
