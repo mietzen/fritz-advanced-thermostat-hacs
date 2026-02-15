@@ -9,6 +9,8 @@ class FritzThermostatOffset(hass.Hass):
 
     def initialize(self):
         """Initialize the app: connect to Fritz!Box and start polling."""
+        self.set_execution_timeout(120)
+
         self.fritz_host = self.args["fritz_host"]
         self.fritz_user = self.args["fritz_user"]
         self.fritz_password = self.args["fritz_password"]
@@ -69,15 +71,23 @@ class FritzThermostatOffset(hass.Hass):
 
                     if new_offset != current_offset:
                         self.log(
-                            "%s: actual=%.1f, thermostat=%.1f, offset %.1f -> %.1f",
-                            name, actual_temp, thermostat_temp, current_offset, new_offset,
+                            "🌡️ %s\n"
+                            "  - sensor: %.1f°C (%s)\n"
+                            "  - thermostat: %.1f°C\n"
+                            "  - offset: %.1f -> %.1f",
+                            name, actual_temp, thermometer,
+                            thermostat_temp, current_offset, new_offset,
                         )
                         self.fat.set_thermostat_offset(name, new_offset)
                         changed = True
                     else:
                         self.log(
-                            "%s: offset %.1f is correct (actual=%.1f, thermostat=%.1f)",
-                            name, current_offset, actual_temp, thermostat_temp, level="DEBUG",
+                            "🌡️ %s\n"
+                            "  - sensor: %.1f°C (%s)\n"
+                            "  - thermostat: %.1f°C\n"
+                            "  - offset: %.1f (no change)",
+                            name, actual_temp, thermometer,
+                            thermostat_temp, current_offset, level="DEBUG",
                         )
                 except FritzAdvancedThermostatError:
                     self.log("Failed to update offset for %s", name, level="ERROR")
