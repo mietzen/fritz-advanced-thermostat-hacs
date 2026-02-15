@@ -26,7 +26,7 @@ Download the `fritz_thermostat_offset` directory from `apps/` to your local AppD
 
 ## Requirements
 
-Add the following to your AppDaemon `requirements.txt` (or the packages section in your addon config):
+Add the following to the AppDaemon packages section in your addon config:
 
 ```txt
 fritz-advanced-thermostat
@@ -68,6 +68,17 @@ fritz_host: "192.168.178.1"
 fritz_user: "my-user"
 fritz_password: "my-password"
 ```
+
+You should see something like this in your AppDaemon logs:
+
+```txt
+2026-02-15 19:34:53.490860 INFO fritz_thermostat_offset: kitchen: actual=19.9, thermostat=19.5, offset -4.5 -> -4.0
+2026-02-15 19:34:53.503856 INFO fritz_thermostat_offset: livingroom_north: actual=19.1, thermostat=19.5, offset -1.0 -> -1.5
+2026-02-15 19:34:53.535354 INFO fritz_thermostat_offset: livingroom_west: actual=19.7, thermostat=20.0, offset -3.0 -> -3.5
+2026-02-15 19:35:02.253148 INFO fritz_thermostat_offset: Committed offset changes to Fritz!Box
+```
+
+this means the app is working.
 
 ### Parameters
 
