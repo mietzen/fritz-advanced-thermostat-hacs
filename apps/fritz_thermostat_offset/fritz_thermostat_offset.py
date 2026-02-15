@@ -21,7 +21,7 @@ class FritzThermostatOffset(hass.Hass):
 
         self.fat = None
 
-        self.run_every(self.update_offsets, "now", self.interval)
+        self.run_every(self.update_offsets, "immediate", self.interval)
 
     def _connect(self):
         """Create a new Fritz!Box connection."""
