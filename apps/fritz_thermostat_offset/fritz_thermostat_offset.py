@@ -43,6 +43,10 @@ class FritzThermostatOffset(hass.Hass):
         if self.fat is None and not self._connect():
             return
 
+        # SID expires after ~20 minutes
+        if self.interval >= 1990:
+            self.fat.refresh_sid()
+
         # Get latest thermostat data
         self.fat.reload_thermostat_data()
 
